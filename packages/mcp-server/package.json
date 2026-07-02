@@ -1,0 +1,26 @@
+{
+  "name": "@revenue-recipes/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server exposing Revenue Recipes metrics as tools for Claude / PostHog AI.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "revenue-recipes-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/index.js",
+    "test": "tsx test/tools.smoke.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@revenue-recipes/core": "*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
