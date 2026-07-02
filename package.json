@@ -12,9 +12,13 @@
     "test": "npm run test --workspaces --if-present",
     "dev": "npm run dev --workspace @revenue-recipes/dashboard",
     "mcp": "npm run start --workspace @revenue-recipes/mcp-server",
+    "seed": "tsx scripts/seed-demo.ts",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0"
   }
 }
