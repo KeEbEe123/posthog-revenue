@@ -13,6 +13,7 @@
     "dev": "npm run dev --workspace @revenue-recipes/dashboard",
     "mcp": "npm run start --workspace @revenue-recipes/mcp-server",
     "seed": "tsx scripts/seed-demo.ts",
+    "seed:posthog": "tsx scripts/seed-posthog.ts",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "engines": {
