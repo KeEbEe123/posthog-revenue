@@ -1,0 +1,60 @@
+{
+  "name": "Revenue Recipes",
+  "url": "https://github.com/KeEbEe123/posthog-revenue",
+  "description": "Enriches revenue events with normalized, queryable revenue metrics (monthly-normalized MRR contribution, movement type, period month, kind) so MRR/expansion/churn are answerable directly in PostHog insights and SQL — no external service required.",
+  "main": "index.js",
+  "posthogVersion": ">= 1.25.0",
+  "config": [
+    {
+      "markdown": "Configure how your revenue events are shaped. This app reads the event named below and adds `rr_*` properties to it. It never drops or redirects events."
+    },
+    {
+      "key": "revenueEventName",
+      "name": "Revenue event name",
+      "type": "string",
+      "default": "revenue",
+      "hint": "Only events with this name are enriched. Others pass through untouched.",
+      "required": true
+    },
+    {
+      "key": "amountProperty",
+      "name": "Amount property",
+      "type": "string",
+      "default": "amount",
+      "hint": "Event property holding the charged amount (negative for refunds).",
+      "required": true
+    },
+    {
+      "key": "currencyProperty",
+      "name": "Currency property",
+      "type": "string",
+      "default": "currency",
+      "hint": "Event property holding the ISO currency code.",
+      "required": false
+    },
+    {
+      "key": "subscriptionProperty",
+      "name": "Subscription property",
+      "type": "string",
+      "default": "subscription_id",
+      "hint": "Presence of this property marks the charge as a subscription (vs one-off).",
+      "required": false
+    },
+    {
+      "key": "intervalProperty",
+      "name": "Billing interval property",
+      "type": "string",
+      "default": "interval",
+      "hint": "Event property holding 'month' or 'year'. Used to normalize annual charges to MRR.",
+      "required": false
+    },
+    {
+      "key": "defaultCurrency",
+      "name": "Default currency",
+      "type": "string",
+      "default": "USD",
+      "hint": "Used when the currency property is absent.",
+      "required": false
+    }
+  ]
+}

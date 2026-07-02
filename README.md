@@ -82,6 +82,20 @@ Tools: `get_revenue_summary`, `get_mrr_breakdown`, `get_top_customers`,
 `get_churn_risk_accounts`. Details in
 [`packages/mcp-server/README.md`](./packages/mcp-server/README.md).
 
+## 5b. Install as a PostHog plugin
+
+This repo doubles as an installable PostHog plugin. The root `plugin.json` +
+`index.js` are a self-contained, dependency-free build of the app in
+`packages/posthog-app` — so you can install it directly:
+
+1. PostHog → **Data pipeline / Plugins** → **Advanced** tab.
+2. **Install from GitHub** using this repo's URL:
+   `https://github.com/KeEbEe123/posthog-revenue`.
+3. Configure the revenue event and property names.
+
+The TypeScript source of record is `packages/posthog-app/index.ts`; the root
+`index.js` mirrors it in plain JS for the installer.
+
 ## 6. Architecture
 
 ```
