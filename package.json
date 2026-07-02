@@ -1,0 +1,20 @@
+{
+  "name": "revenue-recipes",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A composable, open-source replacement for PostHog's deprecated Revenue Analytics dashboard — built on persons/groups revenue properties + MCP.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "dev": "npm run dev --workspace @revenue-recipes/dashboard",
+    "mcp": "npm run start --workspace @revenue-recipes/mcp-server",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
