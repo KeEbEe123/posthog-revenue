@@ -1,0 +1,19 @@
+{
+  "name": "@revenue-recipes/posthog-app",
+  "version": "0.1.0",
+  "description": "PostHog app that enriches revenue events with queryable revenue metrics.",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx test/processEvent.smoke.ts"
+  },
+  "devDependencies": {
+    "@posthog/plugin-scaffold": "^1.4.4",
+    "@types/node": "^20.12.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
