@@ -129,12 +129,21 @@ all call the same functions — no formula is implemented twice.
 
 This is a portfolio project, not a finished product. Honest gaps:
 
-- **`PostHogSource` is best-effort.** PostHog doesn't prescribe one revenue
-  event schema, so the HogQL queries assume conventional property names
-  (`amount`, `subscription_id`, `period_start/end`) and derive subscriptions by
-  grouping revenue events. A real deployment must adapt these to its project and
-  probably read revenue properties off persons/groups directly. Browser→PostHog
-  calls may also hit CORS; the MCP server / Node path is unaffected.
+- **`PostHogSource` has been tested against a live PostHog project**, not just
+  demo data — and that testing found a real bug, since fixed: `getSubscriptions()`
+  originally set a subscription's coverage end to the timestamp of its *last
+  charge*, which made every subscription look churned the instant there was no
+  fresh event in the current month, even customers still paying on schedule.
+  Fixed by extending coverage one billing interval past the last charge (see
+  `addInterval` in `posthogSource.ts`, covered by
+  `tests/posthogSource.test.ts`). What's still best-effort: PostHog doesn't
+  prescribe one revenue event schema, so the HogQL queries assume conventional
+  property names (`amount`, `subscription_id`, `period_start/end`, `interval`)
+  and derive subscriptions by grouping revenue events rather than reading a
+  dedicated subscription object. A real deployment should adapt these to its
+  project and probably read revenue properties off persons/groups directly.
+  Browser→PostHog calls may also hit CORS; the MCP server / Node path is
+  unaffected.
 - **Goals are local.** They live in the dataset (demo) or are user-defined;
   PostHog has no goals concept to read, so `getGoals()` returns `[]` for the
   live source. Persisting user goals would need a small store.

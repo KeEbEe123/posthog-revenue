@@ -6,6 +6,7 @@ export { DemoSource, demoRange } from "./sources/demoSource.js";
 export { generateDataset, type GenerateOptions } from "./sources/generate.js";
 export {
   PostHogSource,
+  addInterval,
   type PostHogSourceConfig,
   type PostHogPropertyMap,
 } from "./sources/posthogSource.js";
