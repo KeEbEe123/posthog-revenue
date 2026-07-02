@@ -32,6 +32,20 @@ metrics, and a standalone **dashboard** that visually replaces the deprecated
 one. It runs fully on seeded demo data with zero configuration, and connects to
 a real PostHog project via a personal API key.
 
+## Screenshots
+
+**Dashboard — Overview & metrics**
+
+![Revenue Recipes dashboard — overview](./assets/dashboard1.png)
+
+**Dashboard — connected to a live PostHog project**
+
+![Revenue Recipes dashboard — top customers](./assets/dashboard2.png)
+
+**MCP server — tools answering revenue questions from the terminal**
+
+![Revenue Recipes MCP server](./assets/mcpTerminalScreenshot.png)
+
 ## 3. Quickstart — demo mode (no config)
 
 ```bash
