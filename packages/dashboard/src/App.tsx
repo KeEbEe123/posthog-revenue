@@ -8,6 +8,24 @@ import { TopCustomers } from "./pages/TopCustomers.js";
 
 type Tab = "overview" | "breakdown" | "customers" | "top";
 
+/**
+ * Default data source. If VITE_POSTHOG_PROJECT_ID + VITE_POSTHOG_PERSONAL_API_KEY
+ * are set at build/dev time, start connected to that live project (persists
+ * across refresh). Otherwise fall back to demo data.
+ *
+ * NOTE: env vars prefixed VITE_ are embedded in the client bundle — anyone with
+ * the page can read the key. Only use this for local dev, never a public deploy.
+ */
+function initialConfig(): SourceConfig {
+  const projectId = import.meta.env.VITE_POSTHOG_PROJECT_ID;
+  const apiKey = import.meta.env.VITE_POSTHOG_PERSONAL_API_KEY;
+  const host = import.meta.env.VITE_POSTHOG_HOST ?? "https://us.posthog.com";
+  if (projectId && apiKey) {
+    return { mode: "posthog", host, projectId, apiKey };
+  }
+  return { mode: "demo" };
+}
+
 const TABS: { id: Tab; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "breakdown", label: "MRR Breakdown" },
@@ -16,7 +34,7 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 export function App() {
-  const [config, setConfig] = useState<SourceConfig>({ mode: "demo" });
+  const [config, setConfig] = useState<SourceConfig>(initialConfig);
   const [tab, setTab] = useState<Tab>("overview");
   const state = useRevenue(config);
 
