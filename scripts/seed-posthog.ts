@@ -26,11 +26,15 @@ function monthsBetween(start: string, end: string): number {
 }
 
 const data = generateDataset({ seed: 42 });
+const nameById = new Map(data.customers.map((c) => [c.id, c.name]));
 
 const batch = data.revenueEvents.map((e) => {
   const properties: Record<string, unknown> = {
     amount: e.amount,
     currency: e.currency ?? "USD",
+    // Stamp the person's name on every event so the persons table is named
+    // regardless of $identify ordering.
+    $set: { name: nameById.get(e.customerId) ?? e.customerId },
   };
   if (e.subscriptionId) {
     properties.subscription_id = e.subscriptionId;
@@ -65,7 +69,7 @@ async function main() {
     const res = await fetch(`${host}/batch/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ api_key: apiKey, historical_migration: true, batch: slice }),
+      body: JSON.stringify({ api_key: apiKey, batch: slice }),
     });
     if (!res.ok) {
       console.error(`Batch ${i / CHUNK} failed: ${res.status} ${res.statusText}`);
